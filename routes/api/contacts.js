@@ -8,8 +8,7 @@ const router = express.Router()
 
 router.get('/', async (req, res, next) => {
   const result = await contacts.listContacts();
-  res.status(200)
-  res.json(result)
+  res.status(200).json(result) 
 })
 
 router.get('/:contactId', async (req, res, next) => {
