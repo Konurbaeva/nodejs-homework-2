@@ -2,9 +2,7 @@ const express = require('express')
 const contacts = require("../../models/contacts")
 
 
-const router = express.Router()
-
-// возвращает массив всех контактов в json-формате со статусом 200
+const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   const result = await contacts.listContacts();
@@ -27,32 +25,27 @@ router.get('/:contactId', async (req, res, next) => {
   }
 })
 
-// router.post('/', async (req, res, next) => {
-//   res.json({ message: 'template message' })
-// })
-
-
-// Получает body в формате {name, email, phone} (все поля обязательны)
-// Если в body нет каких-то обязательных полей, возвращает json с ключом {"message": "missing required name field"} и статусом 400
 // Если с body все хорошо, добавляет уникальный идентификатор в объект контакта
-// Вызывает функцию addContact(body) для сохранения контакта в файле contacts.json
-// По результату работы функции возвращает объект с добавленным id {id, name, email, phone} и статусом 201
 
-// router.post('/', async (req, res, next) => {
-//   // res.json({ message: 'template message' })
+router.post('/', async (req, res, next) => {
+  try {
+    const { name, email, phone } = req.body;
 
-  // TODO add JOI validation for a new object
+    const newContact = {
+      
+    }
+  
+    const newContactReqBody = await contacts.addContact(newContact)
 
-//   try {
-//     const {name, email, phone} = req.body;
-
-//     const reqBody = await contacts.addContact(id, name, email, phone)
-
-   
-//   } catch(err) {
-//     res.status(500).json({message: "Server error"} )
-//   }
-// })
+    if(newContact.name || newContact.email || newContact.phone){
+      res.status(400).json({"message": "missing required field"})
+      } else{
+       res.status(201).json(newContactReqBody)
+      }
+  } catch(err) {
+    res.status(500).json({message: "Server error"} )
+  }
+})
 
 router.delete('/:contactId', async (req, res, next) => {
     const { contactId } = req.params;
