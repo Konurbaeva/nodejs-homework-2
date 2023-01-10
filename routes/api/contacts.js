@@ -1,5 +1,8 @@
 const express = require('express')
 const contacts = require("../../models/contacts")
+const nanoid = require("nanoid");
+
+const Joi = require('joi');
 
 
 const router = express.Router();
@@ -25,25 +28,26 @@ router.get('/:contactId', async (req, res, next) => {
   }
 })
 
+
 // Если с body все хорошо, добавляет уникальный идентификатор в объект контакта
+// Вызывает функцию addContact(body) для сохранения контакта в файле contacts.json
+// По результату работы функции возвращает объект с добавленным id {id, name, email, phone} и статусом 201
 
 router.post('/', async (req, res, next) => {
   try {
     const { name, email, phone } = req.body;
-
-    const newContact = {
-      
-    }
+    if (!name || !email || !phone) {
+      return res.status(400).json({ message: 'Missing required fields' });
+  } else {
   
-    const newContactReqBody = await contacts.addContact(newContact)
+   const newContact = {  id: nanoid(), name, email, phone };
+   const newContactReqBody = await contacts.addContact(newContact)
 
-    if(newContact.name || newContact.email || newContact.phone){
-      res.status(400).json({"message": "missing required field"})
-      } else{
-       res.status(201).json(newContactReqBody)
-      }
-  } catch(err) {
-    res.status(500).json({message: "Server error"} )
+   //  const newContactReqBody = await contacts.addContact(req.body)
+   res.status(201).json(newContactReqBody)
+  }
+} catch(err) {
+    res.status(500).json({message: "Something went wrong"} )
   }
 })
 
