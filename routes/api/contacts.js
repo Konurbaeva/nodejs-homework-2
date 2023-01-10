@@ -30,26 +30,9 @@ router.get('/:contactId', async (req, res, next) => {
      res.status(200).json(contact)
     }
   } catch(err){
-   // res.status(500).json({message: "Server error"} )
    next(err)
   }
 })
-
-
-// router.post('/', async (req, res, next) => {
-//   try{
-//     const { error } = addSchema.validate(req.body);
-
-//     if(error){
-//      res.status(400).json({ message: 'Missing required field' });
-//     } else {
-//       const result = await contacts.addContact(req.body)
-//       res.status(201).json(result)
-//     } } 
-//   catch(err){
-//    next(err)
-//   }
-// })
 
 router.post('/', async (req, res, next) => {
   try{
@@ -72,23 +55,20 @@ router.put('/:contactId', async (req, res, next) => {
 
     if(error){
      res.status(400).json({ message: 'Missing required field' });
-
     } 
+
     const { contactId } = req.params;
 
     const result = await contacts.updateById(contactId, req.body)
 
     if(!result) {
       res.status(404).json({ message: 'Not found' });
-    } 
-  
+    }  
   } 
   catch(err){
    next(err)
   }
 })
-
-
 
 router.delete('/:contactId', async (req, res, next) => {
     const { contactId } = req.params;
