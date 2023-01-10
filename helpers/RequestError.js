@@ -1,4 +1,5 @@
 const messages = {
+    200: "Successfully deleted",
     400: "Bad Request",
     401: "Unauthorized",
     403: "Forbbiden",
@@ -11,3 +12,5 @@ const RequestError = (status, message = messages[status]) => {
     error.status = status;
     return error;
 }
+
+module.exports = RequestError;

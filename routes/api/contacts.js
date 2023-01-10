@@ -1,7 +1,6 @@
 const express = require('express')
 const contacts = require("../../models/contacts")
-
-// const { RequestError } = require("../../helpers")
+const { RequestError } = require("../../helpers")
 
 const Joi = require('joi');
 
@@ -25,7 +24,7 @@ router.get('/:contactId', async (req, res, next) => {
     const contact = await contacts.getContactById(contactId);
   
     if(!contact){
-    res.status(404).json({message: "Not found"})
+    throw RequestError(404, "Not found")
     } else{
      res.status(200).json(contact)
     }
@@ -39,7 +38,7 @@ router.post('/', async (req, res, next) => {
     const { error } = addSchema.validate(req.body);
 
     if(error){
-     res.status(400).json({ message: 'Missing required field' });
+     throw RequestError(400, "Missing required field")
     } else {
       const result = await contacts.addContact(req.body)
       res.status(201).json(result)
@@ -54,7 +53,7 @@ router.put('/:contactId', async (req, res, next) => {
     const { error } = addSchema.validate(req.body);
 
     if(error){
-     res.status(400).json({ message: 'Missing required field' });
+      throw RequestError(400, "Missing required field")
     } 
 
     const { contactId } = req.params;
@@ -62,7 +61,7 @@ router.put('/:contactId', async (req, res, next) => {
     const result = await contacts.updateById(contactId, req.body)
 
     if(!result) {
-      res.status(404).json({ message: 'Not found' });
+     throw RequestError(404, "Not found")
     }  
   } 
   catch(err){
@@ -75,15 +74,11 @@ router.delete('/:contactId', async (req, res, next) => {
     const contact = await contacts.removeContact(contactId);
     
     if(contact){
-      res.status(200).json({"message": "contact deleted"})
-    } else {
-      res.status(404).json({ "message": "Not found" })
+      throw RequestError(200, "Contact deleted")
+    } 
+    else {
+     throw RequestError(404, "Not found")
     }
-})
-
-
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
 })
 
 module.exports = router
