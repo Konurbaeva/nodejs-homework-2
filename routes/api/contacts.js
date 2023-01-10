@@ -1,6 +1,6 @@
 const express = require('express')
 const contacts = require("../../models/contacts")
-// const nanoid = require("nanoid");
+
 // const { RequestError } = require("../../helpers")
 
 const Joi = require('joi');
@@ -36,6 +36,21 @@ router.get('/:contactId', async (req, res, next) => {
 })
 
 
+// router.post('/', async (req, res, next) => {
+//   try{
+//     const { error } = addSchema.validate(req.body);
+
+//     if(error){
+//      res.status(400).json({ message: 'Missing required field' });
+//     } else {
+//       const result = await contacts.addContact(req.body)
+//       res.status(201).json(result)
+//     } } 
+//   catch(err){
+//    next(err)
+//   }
+// })
+
 router.post('/', async (req, res, next) => {
   try{
     const { error } = addSchema.validate(req.body);
@@ -50,6 +65,29 @@ router.post('/', async (req, res, next) => {
    next(err)
   }
 })
+
+router.put('/:contactId', async (req, res, next) => {
+  try{
+    const { error } = addSchema.validate(req.body);
+
+    if(error){
+     res.status(400).json({ message: 'Missing required field' });
+
+    } 
+    const { contactId } = req.params;
+
+    const result = await contacts.updateById(contactId, req.body)
+
+    if(!result) {
+      res.status(404).json({ message: 'Not found' });
+    } 
+  
+  } 
+  catch(err){
+   next(err)
+  }
+})
+
 
 
 router.delete('/:contactId', async (req, res, next) => {
