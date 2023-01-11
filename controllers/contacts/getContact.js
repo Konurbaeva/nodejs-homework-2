@@ -1,10 +1,8 @@
 const contacts = require("../../models/contacts")
 const { RequestError } = require("../../helpers")
 
-const getContact = async (req, res, next) => {
-    try {
-      const { contactId } = req.params;
-  
+const getContact = async (req, res) => {
+     const { contactId } = req.params;
       const contact = await contacts.getContactById(contactId);
     
       if(!contact){
@@ -12,9 +10,6 @@ const getContact = async (req, res, next) => {
       } else{
        res.status(200).json(contact)
       }
-    } catch(err){
-     next(err)
-    }
   }
 
   module.exports = getContact;
