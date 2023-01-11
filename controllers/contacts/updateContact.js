@@ -1,6 +1,8 @@
 const contacts = require("../../models/contacts")
 const { RequestError } = require("../../helpers")
 
+const { addSchema } = require("../../schemas/contactsSchema")
+
 const updateContact = async (req, res, next) => {
     try{
       const { error } = addSchema.validate(req.body);
