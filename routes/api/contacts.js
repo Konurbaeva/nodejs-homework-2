@@ -3,6 +3,8 @@ const contacts = require("../../models/contacts")
 
 const router = express.Router();
 
+const ctrlWrapper = require("../../controllers/contacts")
+
 router.get('/', ctrlWrapper.getAllContacts)
 
 // router.get('/:contactId', async (req, res, next) => {
