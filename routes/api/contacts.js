@@ -1,46 +1,16 @@
 const express = require('express')
-const contacts = require("../../models/contacts")
 
+// const contacts = require("../../models/contacts")
+
+const { ctrlWrapper } = require("../../helpers")
 const router = express.Router();
 
-router.get('/', ctrlWrapper.getAllContacts)
+const ctrl = require("../../controllers")
 
-// router.get('/:contactId', async (req, res, next) => {
-//   try {
-//     const { contactId } = req.params;
+router.get('/', ctrlWrapper(ctrl.getAllContacts))
+router.get('/:contactId', ctrlWrapper(ctrl.getContact))
+router.post('/', ctrlWrapper(ctrl.createContact))
+router.put('/:contactId', ctrlWrapper(ctrl.updateContact))
+router.delete('/:contactId', ctrlWrapper(ctrl.deleteContact))
 
-//     const contact = await contacts.getContactById(contactId);
-  
-//     if(!contact){
-//     throw RequestError(404, "Not found")
-//     } else{
-//      res.status(200).json(contact)
-//     }
-//   } catch(err){
-//    next(err)
-//   }
-// })
-router.get('/:contactId', ctrlWrapper.getContact)
-
-
-// router.post('/', async (req, res, next) => {
-//   try{
-//     const { error } = addSchema.validate(req.body);
-
-//     if(error){
-//      throw RequestError(400, "Missing required field")
-//     } else {
-//       const result = await contacts.addContact(req.body)
-//       res.status(201).json(result)
-//     } } 
-//   catch(err){
-//    next(err)
-//   }
-// })
-router.post('/', ctrlWrapper.createContact)
-
-router.put('/:contactId', ctrlWrapper.updateContact)
-
-router.delete('/:contactId', ctrlWrapper.deleteContact)
-
-module.exports = router
+module.exports = router;
