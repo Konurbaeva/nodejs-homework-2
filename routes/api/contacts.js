@@ -5,7 +5,7 @@ const express = require('express')
 const { ctrlWrapper } = require("../../helpers")
 const router = express.Router();
 
-const ctrl = require("../../controllers/contacts")
+const ctrl = require("../../controllers")
 
 router.get('/', ctrlWrapper(ctrl.getAllContacts))
 router.get('/:contactId', ctrlWrapper(ctrl.getContact))
