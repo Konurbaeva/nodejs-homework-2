@@ -1,7 +1,5 @@
 const express = require('express')
 
-// const contacts = require("../../models/contacts")
-
 const { ctrlWrapper } = require("../../helpers")
 const router = express.Router();
 
