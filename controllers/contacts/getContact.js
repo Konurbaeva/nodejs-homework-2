@@ -8,13 +8,6 @@ const getContact = async (req, res) => {
      const result = await Contact.findById(contactId)
 
      res.json(result)
-    //   const contact = await contacts.getContactById(contactId);
-    
-    //   if(!contact){
-    //   throw RequestError(404, "Not found")
-    //   } else{
-    //    res.status(200).json(contact)
-    //   }
   }
 
   module.exports = getContact;
