@@ -6,6 +6,9 @@ const Contact = require("../../models/contactsSchema")
 const { addSchema } = require("../../schemas/contactsSchema")
 
 const createContact = async (req, res) => {
+
+  const result = await Contact.create(req.body)
+  res.status(201).json(result)
   
   // const { error } = addSchema.validate(req.body);
   // if(error){
@@ -13,7 +16,6 @@ const createContact = async (req, res) => {
   // } else {
   //   const result = await contacts.addContact(req.body)
   //   res.status(201).json(result)
-  
   // } 
 
 }
