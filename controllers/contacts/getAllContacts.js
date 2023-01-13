@@ -1,5 +1,3 @@
-// const contacts = require("../../models/contacts")
-
 const Contact = require("../../models/contactsSchema")
 
 const getAllContacts = async (req, res) => {
