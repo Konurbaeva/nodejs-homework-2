@@ -18,28 +18,14 @@ const contactSchema = new Schema({
      phone: {
         type: String,
         required: true
-      }
+      },
+      favorite: {
+      type: Boolean,
+      default: false,
+    },
    })
 
 
 const Contact = model("contacts", contactSchema)
 
 module.exports = Contact;
-
-
-// {
-//     name: {
-//       type: String,
-//       required: [true, 'Set name for contact'],
-//     },
-//     email: {
-//       type: String,
-//     },
-//     phone: {
-//       type: String,
-//     },
-//     favorite: {
-//       type: Boolean,
-//       default: false,
-//     },
-//   }
