@@ -9,8 +9,10 @@ const ctrl = require("../../controllers/auth")
 
 const router = express.Router()
 
+// router.post("/users/signup", validateBody(schemas.registerSchema), ctrlWrapper(ctrl.register))
+// router.post("/register", validateBody(schemas.registerSchema), ctrlWrapper(ctrl.register))
 
-// router.post("/users/signup")
 router.post("/users/signup", validateBody(schemas.registerSchema), ctrlWrapper(ctrl.register))
+
 
 module.exports = router

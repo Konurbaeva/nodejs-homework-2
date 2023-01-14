@@ -5,6 +5,9 @@ const { RequestError } = require("../../helpers")
 const register = async(req, res) => {
     const { email } = req.body;
 
+   console.log(req.body.email)
+   console.log(req.body.name)
+
     const user = await User.findOne({email})
 
     if(user){
