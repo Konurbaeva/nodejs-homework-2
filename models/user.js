@@ -24,7 +24,11 @@ const userSchema = new Schema({
     },
   }, {versionKey: false, timestamps: true})
 
-  userSchema.post("save", handleMongooseError)
+  // userSchema.post("save", handleMongooseError)
+
+  userSchema.post("save", function(req, res){
+    handleMongooseError
+  })
 
   const registerSchema = Joi.object({
     name: Joi.string().required(),
