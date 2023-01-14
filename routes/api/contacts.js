@@ -1,7 +1,5 @@
 const express = require('express')
 
-// const contacts = require("../../models/contacts")
-
 const { ctrlWrapper } = require("../../helpers")
 const router = express.Router();
 
@@ -11,6 +9,7 @@ router.get('/', ctrlWrapper(ctrl.getAllContacts))
 router.get('/:contactId', ctrlWrapper(ctrl.getContact))
 router.post('/', ctrlWrapper(ctrl.createContact))
 router.put('/:contactId', ctrlWrapper(ctrl.updateContact))
+router.patch('/:contactId/favorite', ctrlWrapper(ctrl.patchContact))
 router.delete('/:contactId', ctrlWrapper(ctrl.deleteContact))
 
 module.exports = router;
