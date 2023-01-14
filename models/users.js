@@ -1,6 +1,8 @@
 const { Schema, model } = require("mongoose")
 const Joi = require("Joi")
 
+const { handleMongooseError } = require("../helpers")
+
 const userSchema = new Schema({
     password: {
       type: String,
@@ -21,3 +23,5 @@ const userSchema = new Schema({
       default: null,
     },
   }, {versionKey: false, timestamps: true})
+
+  userSchema.post("save", handleMongooseError)
