@@ -13,22 +13,22 @@ const userSchema = new Schema({
       required: [true, 'Email is required'],
       unique: true,
     }
-    // ,
-    // subscription: {
-    //   type: String,
-    //   enum: ["starter", "pro", "business"],
-    //   default: "starter"
-    // },
-    // token: {
-    //   type: String,
-    //   default: null,
-    // },
+    ,
+    subscription: {
+      type: String,
+      enum: ["starter", "pro", "business"],
+      default: "starter"
+    },
+    token: {
+      type: String,
+      default: null,
+    },
   }, {versionKey: false, timestamps: true})
 
   userSchema.post("save", RequestError)
 
   const registerSchema = Joi.object({
-    name: Joi.string().required(),
+    // name: Joi.string().required(),
     email:Joi.string().required(),
     password: Joi.string().min(6).required()
   })
