@@ -5,8 +5,6 @@ const { schemas } = require("../../models/user")
 
 const { validateBody, authenticate } = require("../../middlewares")
 
-// const { validateBody } = require("../../middlewares")
-
 const ctrl = require("../../controllers/auth")
 
 const router = express.Router()
