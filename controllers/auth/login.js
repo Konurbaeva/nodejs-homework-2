@@ -4,6 +4,11 @@ const { RequestError } = require("../../helpers")
 
 const bcrypt = require("bcrypt")
 
+const jwt = require("jsonwebtoken")
+
+const { SECRET_KEY } = process.env
+
+
 const login = async(req, res) => {
     const { email, password} = req.body
 
@@ -19,7 +24,11 @@ const login = async(req, res) => {
         throw RequestError(401, "Password invalid")
     }
 
-    const token = "123.jdjsjsjsjusjs"
+    const payload = {
+        id: user._id
+    }
+
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h"})
 
     res.json({
         token,
