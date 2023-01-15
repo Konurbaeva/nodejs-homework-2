@@ -1,5 +1,5 @@
 const Contact = require("../../models/contactsSchema")
-const { RequestError } = require("../../helpers")
+// const { RequestError } = require("../../helpers")
 
 const getContact = async (req, res) => {
      const { contactId } = req.params;
