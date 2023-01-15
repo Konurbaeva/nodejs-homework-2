@@ -9,7 +9,7 @@ const ctrl = require("../../controllers/auth")
 
 const router = express.Router()
 
-router.post("/users/signup", authenticate, validateBody(schemas.registerSchema), ctrlWrapper(ctrl.register))
+router.post("/users/signup", validateBody(schemas.registerSchema), ctrlWrapper(ctrl.register))
 
 
 router.post("/users/login", authenticate, validateBody(schemas.loginSchema), ctrlWrapper(ctrl.login))

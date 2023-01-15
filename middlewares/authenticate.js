@@ -4,6 +4,8 @@ const { RequestError } = require("../helpers")
 
 const { User } = require("../models/user")
 
+require("dotenv").config()
+
 const { SECRET_KEY } = process.env
 
 const authenticate = async(req, res, next) => {
@@ -16,6 +18,8 @@ const authenticate = async(req, res, next) => {
     try{
         const { id } = jwt.verify(token, SECRET_KEY)
         const user = await User.findById(id)
+
+        console.log(user);
 
         if(!user){
             next(RequestError(401))
