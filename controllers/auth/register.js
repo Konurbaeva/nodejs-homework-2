@@ -11,7 +11,7 @@ const register = async(req, res) => {
     const user = await User.findOne({email})
 
     if(user){
-        throw RequestError(409, "Email in use")
+        throw RequestError(409, "409 Conflict: Email already in use")
     }
 
     const newUser = await User.create(req.body)
