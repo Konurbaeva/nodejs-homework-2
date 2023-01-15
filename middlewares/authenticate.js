@@ -13,17 +13,18 @@ const authenticate = async(req, res, next) => {
     const [bearer, token] = authorization.split(" ")
 
     if(bearer!== "Bearer"){
-       next( RequestError(401))
+       next(RequestError(401))
     }
     try{
-        const { id } = jwt.verify(token, SECRET_KEY)
-        const user = await User.findById(id)
+       const { id } = jwt.verify(token, SECRET_KEY)
+       const user = await User.findById(id)
 
         if(!user){
             next(RequestError(401))
         }
 
         req.user = user
+        next()
 
     } catch(error) {
       next(RequestError(401))
