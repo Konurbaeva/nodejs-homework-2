@@ -15,6 +15,7 @@ mongoose.connect(DB_HOST)
 .catch(error => console.log(error.message))
 
 
+const authRouter = require("./routes/api/auth")
 const contactsRouter = require('./routes/api/contacts')
 const { listContacts } = require('./models/contacts')
 
@@ -24,8 +25,11 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
 app.use(logger(formatsLogger))
 app.use(cors())
+// parse application/json
 app.use(express.json())
 
+
+app.use('/api/auth', authRouter)
 app.use('/api/contacts', contactsRouter)
 
 app.use((req, res) => {
