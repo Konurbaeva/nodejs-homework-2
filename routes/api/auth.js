@@ -17,11 +17,8 @@ router.get("/users/current", authenticate, ctrlWrapper(ctrl.getCurrent))
 
 router.post("/users/logout", authenticate, ctrlWrapper(ctrl.logout))
 
-// router.patch("/avatars", authenticate, upload.single("avatars"), ctrlWrapper(ctrl.updateAvatar))
-
 router.patch(
-  //  "/users/avatars",
-    "/avatars",
+    "/users/avatars",
     authenticate,
     upload.single("avatar"),
     ctrlWrapper(ctrl.updateAvatar)
