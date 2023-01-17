@@ -27,6 +27,7 @@ app.use(logger(formatsLogger))
 app.use(cors())
 // parse application/json
 app.use(express.json())
+app.use(express.static("public"))
 
 
 app.use('/api/auth', authRouter)
