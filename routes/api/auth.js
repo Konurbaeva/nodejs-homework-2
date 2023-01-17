@@ -20,10 +20,10 @@ router.post("/users/logout", authenticate, ctrlWrapper(ctrl.logout))
 // router.patch("/avatars", authenticate, upload.single("avatars"), ctrlWrapper(ctrl.updateAvatar))
 
 router.patch(
-   // "/users/avatars",
+  //  "/users/avatars",
     "/avatars",
     authenticate,
-    upload.single("avatars"),
+    upload.single("avatar"),
     ctrlWrapper(ctrl.updateAvatar)
   );
 
